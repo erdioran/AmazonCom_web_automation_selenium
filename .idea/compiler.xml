@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="AmazonUK_web_automation_selenium" target="8" />
+      <module name="AmazonUK_web_automation_selenium" target="1.8.0_202" />
     </bytecodeTargetLevel>
   </component>
 </project>
