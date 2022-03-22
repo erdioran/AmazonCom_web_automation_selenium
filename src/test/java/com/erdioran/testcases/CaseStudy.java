@@ -47,7 +47,7 @@ public class CaseStudy extends BaseTest {
         System.out.println("The price of the last product whose price is displayed: " + getText(PRICE_OF_THE_FIRST_PRODUCT_ON_THE_PAGE));
 
         // Verify displayed
-        Assert.assertNotEquals(null, getText(PRICE_OF_THE_FIRST_PRODUCT_ON_THE_PAGE),"There is at least one list price on the page.");
+        Assert.assertTrue(findObject(PRICE_OF_THE_FIRST_PRODUCT_ON_THE_PAGE).isDisplayed(), "There is at least one list price on the page.");
 
 
     }
