@@ -8,9 +8,13 @@
     </listeners>
     <test name="CaseStudy" enabled="true">
         <classes>
-            <class name="com.erdioran.testcases.CaseStudy">
+            <class name="com.erdioran.testcases.SignUpTests">
                 <methods>
-                    <include name="case1"/>
+                    <include name="nameEmpty"/>
+                    <include name="passwordEmpty"/>
+                    <include name="mailEmpty"/>
+                    <include name="passwordEmpty"/>
+                    <include name="successCreate"/>
                 </methods>
             </class>
         </classes>
