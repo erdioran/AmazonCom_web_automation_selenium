@@ -28,27 +28,6 @@ public class CaseStudy extends BaseTest {
     @Test(description = "case1", priority = 1)
     public void case1(ITestContext context) {
 
-        ExtentTest test = ExtentTestManager.getNode();
-        test.info("case1: Searh product -> order of insertion  -> ....");
-
-        // Verify home page
-        Assert.assertEquals(HOME_URL, getPageUrl());
-
-        //WAİT KOY BURAYA
-        click(ACCEPT_COOKIES);
-
-        click(SEARCH_BAR);
-        enterText(SEARCH_BAR, DataManager.getData("data.product_search"));
-        click(SEARCH_BAR_SUBMIT_BUTTON);
-
-        click(SORT_BY_BUTTON);
-        click(NEWEST_ARRIVALS_BUTTON);
-
-        System.out.println("The price of the last product whose price is displayed: " + getText(PRICE_OF_THE_FIRST_PRODUCT_ON_THE_PAGE));
-
-        // Verify displayed
-        Assert.assertTrue(findObject(PRICE_OF_THE_FIRST_PRODUCT_ON_THE_PAGE).isDisplayed(), "There is at least one list price on the page.");
-
 
     }
 

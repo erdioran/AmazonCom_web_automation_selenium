@@ -3,6 +3,7 @@ package com.erdioran.base;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.erdioran.listener.SeleniumListener;
+import com.erdioran.utils.ConfigManager;
 import com.erdioran.utils.DataManager;
 import com.erdioran.utils.ExtentTestManager;
 import com.erdioran.utils.Helper;
@@ -34,26 +35,41 @@ public abstract class BaseTest {
                 result.getTestClass().getName());
         String nodeName =
                 StringUtils.isNotBlank(result.getMethod().getDescription()) ? result.getMethod().getDescription() : method.getName();
-        ExtentTest test = ExtentTestManager.getTest().createNode(nodeName);
-        ExtentTestManager.setNode(test);
-        test.info("Test Started");
-        LOGGER.info("Launching fresh browser");
-        launchBrowser(context);
-        homePage();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void closeBrowser(ITestResult result, ITestContext context) {
-        if (!result.isSuccess()) {
-            LOGGER.error("Current test method failed");
-            context.setAttribute("previousTestStatus", "failed");
-            ExtentTestManager.getNode().fail("Test failed");
-            DriverManager.quitDriver();
+        ExtentTest node = ExtentTestManager.getTest().createNode(nodeName);
+        ExtentTestManager.setNode(node);
+        ExtentTestManager.info("Test Started");
+        String status = (String) context.getAttribute("previousTestStatus");
+        boolean isNewBrowserPerTest = Boolean.parseBoolean(ConfigManager.getConfigProperty("new.browser.per.test"));
+        boolean isCleanUpTest = context.getName().contains("Clean");
+        if (!isNewBrowserPerTest) {
+            if (status == null || status.equalsIgnoreCase("failed")) {
+                LOGGER.info("Launching fresh browser");
+                DriverManager.launchBrowser(ConfigManager.getBrowser());
+            } else {
+                LOGGER.info("Skip log in");
+            }
+        } else if (isCleanUpTest) {
+            LOGGER.info("Clean up test. Skip log in");
         } else {
-            context.setAttribute("previousTestStatus", "passed");
-            DriverManager.quitDriver();
+            DriverManager.launchBrowser(ConfigManager.getBrowser());
         }
     }
+
+
+    @AfterMethod(alwaysRun = true)
+    public void CloseBrowser(ITestResult result, ITestContext context) {
+        if (!result.isSuccess()) {
+            context.setAttribute("previousTestStatus", "failed");
+        } else {
+            context.setAttribute("previousTestStatus", "passed");
+        }
+        //   boolean isNewBrowserPerTest = Boolean.parseBoolean(ConfigManager.getConfigProperty("new.browser.per.test"));
+        //   boolean isCleanUpTest = context.getName().contains("Clean");
+
+        DriverManager.quitDriver();
+
+    }
+
 
     @AfterTest(alwaysRun = true)
     public void afterTest() {
@@ -69,30 +85,6 @@ public abstract class BaseTest {
     public void afterSuite() {
         DriverManager.quitDriver();
         Helper.deleteAllFiles(".json", Constant.TARGET_DIR, "eventsExport");
-    }
-
-    private void launchBrowser(ITestContext context) {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-gpu");
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize();
-        EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
-        eventFiringWebDriver.register(new SeleniumListener());
-        DriverManager.setDriver(eventFiringWebDriver);
-    }
-
-
-    public void homePage() {
-        LOGGER.info("Logging into application");
-        WebDriver driver = DriverManager.getDriver();
-        try {
-            driver.get(DataManager.getData("data.url"));
-        } catch (Exception e) {
-            LOGGER.info("Page failed to load. Trying again");
-            driver.get(DataManager.getData("data.url"));
-        }
-
     }
 
 

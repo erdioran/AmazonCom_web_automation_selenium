@@ -6,6 +6,7 @@ import com.erdioran.utils.Helper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -75,6 +76,13 @@ public class Page {
 
     public static String getPageUrl() {
         return DriverManager.getDriver().getCurrentUrl();
+    }
+
+
+    public static void hoverToElement (By path){
+        WebElement element = DriverManager.getDriver().findElement(path);
+        Actions action = new Actions(DriverManager.getDriver());
+        action.moveToElement(element).perform();
     }
 
 

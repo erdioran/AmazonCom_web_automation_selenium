@@ -2,6 +2,7 @@
 <suite name="Suite" verbose="1" thread-count="1">
     <listeners>
         <listener class-name="com.erdioran.listener.ExecutionListener"/>
+        <listener class-name="com.erdioran.listener.SuiteListener"/>
         <listener class-name="com.erdioran.listener.TestListener"/>
         <listener class-name="com.erdioran.listener.AnnotationTransformer"/>
     </listeners>

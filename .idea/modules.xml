@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/AmazonUK_web_automation_selenium.iml" filepath="$PROJECT_DIR$/.idea/AmazonUK_web_automation_selenium.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AmazonCom_web_automation_selenium.iml" filepath="$PROJECT_DIR$/.idea/AmazonCom_web_automation_selenium.iml" />
     </modules>
   </component>
 </project>
