@@ -46,10 +46,10 @@ public class Common extends Page {
     }
 
     public static void signIn() {
-        signIn(getData("signupLogin.name"), getData("signupLogin.mail"), getData("signupLogin.password"),getData("signupLogin.password"));
+        signIn(getData("signupLogin.name"), getData("signupLogin.mail"), getData("signupLogin.password"), getData("signupLogin.password"));
     }
 
-    public static void signIn(String name, String mail, String password,String rePassword) {
+    public static void signIn(String name, String mail, String password, String rePassword) {
         LOGGER.info("Sign up page");
         WebDriver driver = DriverManager.getDriver();
         try {
@@ -60,13 +60,13 @@ public class Common extends Page {
             driver.navigate().refresh();
         }
 
-        signInCredentials(name, mail, password,rePassword);
+        signInCredentials(name, mail, password, rePassword);
         click(SIGN_UP_BUTTON_CONTINUE);
 
 
     }
 
-    public static void signInCredentials(String name, String mail, String password,String rePassword) {
+    public static void signInCredentials(String name, String mail, String password, String rePassword) {
         enterText(SIGN_UP_NAME, name);
         enterText(SIGN_UP_MAIL, mail);
         enterText(SIGN_UP_PASSWORD, password);
@@ -88,7 +88,6 @@ public class Common extends Page {
     }
 
 
-
     public static void enterCredentialsStepMail(String mail) {
         enterText(LOGIN_MAIL, mail);
     }
@@ -96,5 +95,7 @@ public class Common extends Page {
     public static void enterCredentialsStepPassword(String password) {
         enterText(LOGIN_PASSWORD, password);
     }
+
+
 
 }

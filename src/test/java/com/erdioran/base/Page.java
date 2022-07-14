@@ -85,5 +85,11 @@ public class Page {
         action.moveToElement(element).perform();
     }
 
+    public static int getListSize(By by) {
+
+        int size = DriverManager.getDriver().findElements(by).size();
+        return size;
+    }
+
 
 }
