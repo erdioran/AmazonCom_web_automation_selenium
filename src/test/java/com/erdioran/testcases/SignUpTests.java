@@ -25,7 +25,7 @@ public class SignUpTests extends BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod(ITestContext context) {
         ExtentTest test = ExtentTestManager.getNode();
-        test.assignCategory("Login Page");
+        test.assignCategory("SignUp Page");
     }
 
 

@@ -6,12 +6,11 @@
         <listener class-name="com.erdioran.listener.TestListener"/>
         <listener class-name="com.erdioran.listener.AnnotationTransformer"/>
     </listeners>
-    <test name="CaseStudy" enabled="true">
+    <test name="SignUp Cases" enabled="true">
         <classes>
             <class name="com.erdioran.testcases.SignUpTests">
                 <methods>
                     <include name="nameEmpty"/>
-                    <include name="passwordEmpty"/>
                     <include name="mailEmpty"/>
                     <include name="passwordEmpty"/>
                     <include name="successCreate"/>

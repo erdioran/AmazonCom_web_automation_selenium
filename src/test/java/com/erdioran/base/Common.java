@@ -26,7 +26,7 @@ public class Common extends Page {
     }
 
     public static void login(String mail, String password) {
-        LOGGER.info("Logging into Amazon.co.uk");
+        LOGGER.info("Logging into Amazon.com");
         WebDriver driver = DriverManager.getDriver();
         try {
             driver.get(getData("signupLogin.loginUrl"));
